@@ -1,0 +1,42 @@
+{
+  "id": "item-123",
+  "attributes": {
+    "sku": "ABC123",
+    "name": "Widget",
+    "description": "A test widget",
+    "category": "Tools",
+    "unit_price": 19.99,
+    "stock_level": 100,
+    "location": "Aisle 5",
+    "is_active": true,
+    "photo_base64": "/9j/4AAQSkZJRgABAQEASABIAAD..."
+  },
+  "meta": {
+    "operation": "create",
+    "resource_type": "inventory",
+    "request_id": "req-001"
+  },
+  "time_meta": {
+    "bought": "2025-10-01T10:00:00Z",
+    "expires": "2026-10-01T10:00:00Z"
+  },
+  "relationships": {
+    "supplier": {
+      "id": "sup-10",
+      "type": "manufacturer",
+      "name": "Acme Corp"
+    },
+    "tags": [
+      {"id": "tag-1", "name": "fragile"},
+      {"id": "tag-2", "name": "new"}
+    ]
+  },
+  "comments": [
+    {
+      "id": "cmt-001",
+      "miscellaneous": "First shipment arrived",
+      "created_at": "2025-10-02T12:30:00Z",
+      "created_by": "admin"
+    }
+  ]
+}
