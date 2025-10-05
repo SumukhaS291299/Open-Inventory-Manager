@@ -1,16 +1,26 @@
 package inventorymanager
 
-import "time"
+import (
+	"sync"
+	"time"
+)
+
+// Will add later is necessary
+//  Meta       *ItemMeta   `json:"meta"`               // Metadata about operations
+// type ItemMeta struct {
+// 	Operation    string `json:"operation,omitempty"`
+// 	ResourceType string `json:"resource_type,omitempty"`
+// 	RequestID    string `json:"request_id"`
+// }
 
 // --- Core Item ---
 type InventoryItem struct {
-	ID         int64       `json:"id"`         // Unique system-wide ID
-	Attributes *Attributes `json:"attributes"` // Core product details
-	// Meta       *ItemMeta   `json:"meta"`               // Metadata about operations
-	TimeMeta *TimeMeta  `json:"time_meta"`          // Purchase + expiry
-	Supplier *Supplier  `json:"supplier,omitempty"` // Supplier
-	Comments []*Comment `json:"comments,omitempty"` // Multiple, optional
-	Tags     []*Tag     `json:"tags,omitempty"`     // Tags to filter custom definitions
+	ID         int64       `json:"id"`                 // Unique system-wide ID
+	Attributes *Attributes `json:"attributes"`         // Core product details
+	TimeMeta   *TimeMeta   `json:"time_meta"`          // Purchase + expiry
+	Supplier   *Supplier   `json:"supplier,omitempty"` // Supplier
+	Comments   []*Comment  `json:"comments,omitempty"` // Multiple, optional
+	Tags       []*Tag      `json:"tags,omitempty"`     // Tags to filter custom definitions
 }
 
 // --- Attributes & Metadata ---
@@ -35,12 +45,6 @@ type TimeMeta struct {
 	Modified time.Time `json:"modified"`
 }
 
-// type ItemMeta struct {
-// 	Operation    string `json:"operation,omitempty"`
-// 	ResourceType string `json:"resource_type,omitempty"`
-// 	RequestID    string `json:"request_id"`
-// }
-
 // --- Linked Entities ---
 type Supplier struct {
 	SupplierType string `json:"supplier_type,omitempty"`
@@ -62,7 +66,25 @@ type Comment struct {
 	CreatedBy     string      `json:"created_by"`
 }
 
-// --- Collections ---
+// --- Collection with lock ---
 type InventoryCollection struct {
+	mu    sync.Mutex
 	Items []*InventoryItem `json:"items"`
+}
+
+// --- Filter Definition ---
+type ItemFilter struct {
+	ID          *int64
+	Name        string
+	Category    string
+	Color       string
+	Location    string
+	Supplier    string
+	IsActive    *bool
+	IsAvailable *bool
+}
+
+type ModifyRequest struct {
+	Filter ItemFilter    `json:"filter"`
+	Update InventoryItem `json:"update"`
 }

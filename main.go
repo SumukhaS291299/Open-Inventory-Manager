@@ -12,11 +12,15 @@ func main() {
 
 	logger.InitLogger()
 	logger.Logger.Info("Starting application...")
+
 	// qrutils.Generate("www.google.com")
 	inventorymanager.EnableServices()
 	go inventorymanager.Run(exit)
 
-	time.Sleep(time.Second * 5)
-	<-exit
-	logger.Logger.Info("Waiting all process to stop gracefully")
+	val, ok := <-exit
+	if ok && val {
+		close(exit) // optional: close channel if you want to signal others
+	}
+	// Sleep for a minute so that all go routines can come to stop
+	time.Sleep(time.Minute)
 }
