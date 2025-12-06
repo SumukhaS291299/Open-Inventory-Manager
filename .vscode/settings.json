@@ -3,6 +3,7 @@
         "inventrymanagerserver",
         "openinventorymanager",
         "protos",
-        "qrutils"
+        "qrutils",
+        "Sumukha"
     ]
 }

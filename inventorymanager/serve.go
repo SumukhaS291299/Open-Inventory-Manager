@@ -4,8 +4,9 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"openinventorymanager/logger"
 	"time"
+
+	"github.com/SumukhaS291299/Open-Inventory-Manager/logger"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,9 +1,10 @@
 package main
 
 import (
-	"openinventorymanager/inventorymanager"
-	"openinventorymanager/logger"
 	"time"
+
+	"github.com/SumukhaS291299/Open-Inventory-Manager/inventorymanager"
+	"github.com/SumukhaS291299/Open-Inventory-Manager/logger"
 )
 
 func main() {

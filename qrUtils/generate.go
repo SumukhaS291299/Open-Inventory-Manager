@@ -2,7 +2,8 @@ package qrutils
 
 import (
 	"image/color"
-	"openinventorymanager/logger"
+
+	"github.com/SumukhaS291299/Open-Inventory-Manager/logger"
 
 	qrcode "github.com/skip2/go-qrcode"
 )

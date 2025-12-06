@@ -1,4 +1,4 @@
-module openinventorymanager
+module github.com/SumukhaS291299/Open-Inventory-Manager
 
 go 1.24.3
 

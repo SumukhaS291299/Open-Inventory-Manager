@@ -3,11 +3,12 @@ package inventorymanager
 import (
 	"encoding/json"
 	"errors"
-	"openinventorymanager/logger"
 	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
+
+	"github.com/SumukhaS291299/Open-Inventory-Manager/logger"
 )
 
 var (
