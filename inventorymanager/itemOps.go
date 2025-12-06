@@ -1,9 +1,11 @@
 package inventorymanager
 
 import (
+	"encoding/json"
 	"errors"
+	"openinventorymanager/logger"
+	"strconv"
 	"strings"
-	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -12,11 +14,12 @@ var (
 	items         *InventoryCollection
 	counter       int64 = 0
 	lastTimestamp int64 = 0
-	mu            sync.Mutex
 )
 
 // --- ID generator ---
 func generateUniqueID() int64 {
+	// Only unique IDs are using UTC time
+	// All others are using Local time
 	now := time.Now().UnixMilli()
 	if now == atomic.LoadInt64(&lastTimestamp) {
 		c := atomic.AddInt64(&counter, 1)
@@ -33,9 +36,6 @@ func (c *InventoryCollection) AddItem(unitPrice float32, stock int, name, descri
 	if name == "" || category == "" {
 		return nil, errors.New("name and category are required")
 	}
-
-	c.mu.Lock()
-	defer c.mu.Unlock()
 
 	item := &InventoryItem{
 		ID: generateUniqueID(),
@@ -56,7 +56,24 @@ func (c *InventoryCollection) AddItem(unitPrice float32, stock int, name, descri
 		},
 	}
 
+	c.mu.Lock()
 	c.Items = append(c.Items, item)
+	c.mu.Unlock()
+
+	go func(id int64, localItem *InventoryItem) {
+		data, err := json.Marshal(localItem)
+		if err != nil {
+			logger.Logger.Error("Failed to serialize item: " + err.Error())
+		}
+		saveErr := SaveToBadger(id, data)
+		if saveErr != nil {
+			logger.Logger.Error(saveErr.Error())
+		} else {
+			logger.Logger.Debug("Saved item with ID: \t" + strconv.FormatInt(id, 10) + "\n\t With name:" + item.Attributes.Name)
+		}
+
+	}(item.ID, item)
+
 	return item, nil
 }
 

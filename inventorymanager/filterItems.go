@@ -1,59 +1,59 @@
 package inventorymanager
 
-import (
-	"strings"
-)
+// Add filter with go-routines in future
 
-// --- Fetch logic ---
-func FindItems(filter ItemFilter) ([]*InventoryItem, error) {
-	mu.Lock()
-	defer mu.Unlock()
+// import (
+// 	"strings"
+// )
 
-	if items == nil || len(items.Items) == 0 {
-		return nil, nil
-	}
+// // --- Fetch logic ---
+// func FindItems(filter ItemFilter) ([]*InventoryItem, error) {
 
-	var results []*InventoryItem
+// 	if c == nil || len(c.Items) == 0 {
+// 		return nil, nil
+// 	}
 
-	for _, item := range items.Items {
-		if item == nil || item.Attributes == nil {
-			continue
-		}
+// 	var results []*InventoryItem
 
-		attr := item.Attributes
-		match := true
+// 	for _, item := range c.Items {
+// 		if item == nil || item.Attributes == nil {
+// 			continue
+// 		}
 
-		// --- Check filters one by one ---
-		if filter.ID != nil && *filter.ID != item.ID {
-			match = false
-		}
-		if filter.Name != "" && !strings.EqualFold(attr.Name, filter.Name) {
-			match = false
-		}
-		if filter.Category != "" && !strings.EqualFold(attr.Category, filter.Category) {
-			match = false
-		}
-		if filter.Color != "" && !strings.EqualFold(attr.Color, filter.Color) {
-			match = false
-		}
-		if filter.Location != "" && !strings.EqualFold(attr.Location, filter.Location) {
-			match = false
-		}
-		if filter.IsActive != nil && attr.IsActive != *filter.IsActive {
-			match = false
-		}
-		if filter.IsAvailable != nil && attr.IsAvailable != *filter.IsAvailable {
-			match = false
-		}
-		if filter.Supplier != "" && item.Supplier != nil &&
-			!strings.EqualFold(item.Supplier.Name, filter.Supplier) {
-			match = false
-		}
+// 		attr := item.Attributes
+// 		match := true
 
-		if match {
-			results = append(results, item)
-		}
-	}
+// 		// --- Check filters one by one ---
+// 		if filter.ID != nil && *filter.ID != item.ID {
+// 			match = false
+// 		}
+// 		if filter.Name != "" && !strings.EqualFold(attr.Name, filter.Name) {
+// 			match = false
+// 		}
+// 		if filter.Category != "" && !strings.EqualFold(attr.Category, filter.Category) {
+// 			match = false
+// 		}
+// 		if filter.Color != "" && !strings.EqualFold(attr.Color, filter.Color) {
+// 			match = false
+// 		}
+// 		if filter.Location != "" && !strings.EqualFold(attr.Location, filter.Location) {
+// 			match = false
+// 		}
+// 		if filter.IsActive != nil && attr.IsActive != *filter.IsActive {
+// 			match = false
+// 		}
+// 		if filter.IsAvailable != nil && attr.IsAvailable != *filter.IsAvailable {
+// 			match = false
+// 		}
+// 		if filter.Supplier != "" && item.Supplier != nil &&
+// 			!strings.EqualFold(item.Supplier.Name, filter.Supplier) {
+// 			match = false
+// 		}
 
-	return results, nil
-}
+// 		if match {
+// 			results = append(results, item)
+// 		}
+// 	}
+
+// 	return results, nil
+// }

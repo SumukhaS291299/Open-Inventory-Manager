@@ -10,6 +10,22 @@ func main() {
 
 	exit := make(chan bool) // From any other operations
 
+	err := inventorymanager.InitDB("C:\\Users\\shank\\Desktop\\PDF\\", exit)
+
+	if err != nil {
+		logger.Logger.Error(err.Error())
+		logger.Logger.Fatal("There was some error in loading your data")
+		close(exit)
+	}
+
+	err = inventorymanager.LoadAllItems()
+
+	if err != nil {
+		logger.Logger.Error(err.Error())
+		logger.Logger.Fatal("There was some error in loading your data")
+		close(exit)
+	}
+
 	logger.InitLogger()
 	logger.Logger.Info("Starting application...")
 
