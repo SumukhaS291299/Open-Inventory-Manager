@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"time"
 
 	"github.com/SumukhaS291299/Open-Inventory-Manager/inventorymanager"
@@ -11,7 +12,13 @@ func main() {
 
 	exit := make(chan bool) // From any other operations
 
-	err := inventorymanager.InitDB("C:\\Users\\shank\\Desktop\\PDF\\", exit)
+	dbPath := flag.String("dbpath", "", "Path to DB folder")
+	flag.Parse()
+
+	if *dbPath == "" {
+		logger.Logger.Error("Error: --dbpath is required")
+	}
+	err := inventorymanager.InitDB(*dbPath, exit)
 
 	if err != nil {
 		logger.Logger.Error(err.Error())
