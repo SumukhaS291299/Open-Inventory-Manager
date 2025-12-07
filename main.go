@@ -10,6 +10,8 @@ import (
 
 func main() {
 
+	logger.InitLogger()
+	logger.Logger.Info("Starting application...")
 	exit := make(chan bool) // From any other operations
 
 	dbPath := flag.String("dbpath", "", "Path to DB folder")
@@ -33,9 +35,6 @@ func main() {
 		logger.Logger.Fatal("There was some error in loading your data")
 		close(exit)
 	}
-
-	logger.InitLogger()
-	logger.Logger.Info("Starting application...")
 
 	// qrutils.Generate("www.google.com")
 	inventorymanager.EnableServices()
