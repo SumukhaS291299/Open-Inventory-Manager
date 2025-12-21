@@ -1,7 +1,7 @@
 # ============================
 # STAGE 1 — Build the Go binary
 # ============================
-FROM golang:1.22-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 # Install build tools (optional but recommended)
 RUN apk add --no-cache git
@@ -34,8 +34,12 @@ WORKDIR /app
 # Copy the built binary from builder stage
 COPY --from=builder /app/inventory-server .
 
+# It declares "this path is data"
+VOLUME ["/data/db"]
+
 # Expose the port your Gin server uses (change if needed)
 EXPOSE 8080
 
 # Run the server
-CMD ["./inventory-server"]
+ENTRYPOINT [ "./inventory-server" ]
+CMD ["-dbpath","/data/db"]

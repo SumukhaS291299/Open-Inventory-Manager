@@ -95,6 +95,10 @@ All items are stored asynchronously in **BadgerDB**:
 * Embedded (no external DB needed)
 * Data survives server restarts
 
+If you are using the image
+
+By default it will persist a VOLUME in ["/data/db"] inside the container
+
 ---
 
 Rules:
