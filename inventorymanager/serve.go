@@ -27,28 +27,10 @@ func addItem(c *gin.Context) {
 		return
 	}
 
-	if item.Attributes == nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "attributes are required"})
-		return
-	}
-
-	newItem, err := Inv.AddItem(
-		item.Attributes.UnitPrice,
-		item.Attributes.StockLevel,
-		item.Attributes.Name,
-		item.Attributes.Description,
-		item.Attributes.Location,
-		item.Attributes.Color,
-		item.Attributes.Category,
-	)
+	newItem, err := Inv.AddItem(&item)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
-	}
-
-	// Attach supplier if provided
-	if item.Supplier != nil {
-		newItem.Supplier = item.Supplier
 	}
 
 	full := c.DefaultQuery("full", "false") == "true"

@@ -33,28 +33,18 @@ func generateUniqueID() int64 {
 }
 
 // --- Add Item ---
-func (c *InventoryCollection) AddItem(unitPrice float32, stock int, name, description, location, color, category string) (*InventoryItem, error) {
-	if name == "" || category == "" {
+func (c *InventoryCollection) AddItem(addItem *InventoryItem) (*InventoryItem, error) {
+	if addItem.Attributes.Name == "" || addItem.Attributes.Category == "" {
 		return nil, errors.New("name and category are required")
 	}
 
 	item := &InventoryItem{
-		ID: generateUniqueID(),
-		Attributes: &Attributes{
-			Name:        name,
-			Description: description,
-			Color:       color,
-			Category:    category,
-			UnitPrice:   unitPrice,
-			StockLevel:  stock,
-			Location:    location,
-			IsActive:    true,
-			IsAvailable: stock > 0,
-		},
-		TimeMeta: &TimeMeta{
-			Bought:   time.Now().Local(),
-			Modified: time.Now().Local(),
-		},
+		ID:         generateUniqueID(),
+		Attributes: addItem.Attributes,
+		TimeMeta:   addItem.TimeMeta,
+		Supplier:   addItem.Supplier,
+		Comments:   addItem.Comments,
+		Tags:       addItem.Tags,
 	}
 
 	c.mu.Lock()
