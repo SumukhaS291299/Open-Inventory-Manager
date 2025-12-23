@@ -52,6 +52,11 @@ func filterItems(c *gin.Context) {
 	c.JSON(http.StatusOK, results)
 }
 
+func getAllItems(c *gin.Context) {
+	results := Inv.FindItems(ItemFilter{})
+	c.JSON(http.StatusOK, results)
+}
+
 func modifyItem(c *gin.Context) {
 	var req ModifyRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -126,8 +131,9 @@ func deleteItems(c *gin.Context) {
 func EnableServices() {
 	ginengine.POST("/additem", addItem)          // create
 	ginengine.DELETE("/deleteitem", deleteItems) // delete
-	ginengine.GET("/filteritem", filterItems)    // read list
+	ginengine.POST("/filteritem", filterItems)   // read list
 	ginengine.PUT("/modifyitem", modifyItem)     // update
+	ginengine.GET("/getitems", getAllItems)      // get all items
 }
 
 func Run(exit chan bool) {
