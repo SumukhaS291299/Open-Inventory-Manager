@@ -1,138 +1,167 @@
 {
-    "meta": {
-        "format": "httpie",
-        "version": "1.0.0",
-        "contentType": "collection",
-        "schema": "https://schema.httpie.io/1.0.0.json",
-        "docs": "https://httpie.io/r/help/export-from-httpie",
-        "source": "HTTPie Desktop 2025.2.0"
+  "meta": {
+    "format": "httpie",
+    "version": "1.0.0",
+    "contentType": "collection",
+    "schema": "https://schema.httpie.io/1.0.0.json",
+    "docs": "https://httpie.io/r/help/export-from-httpie",
+    "source": "HTTPie Desktop 2025.2.0"
+  },
+  "entry": {
+    "name": "OpenInventory",
+    "icon": {
+      "name": "database",
+      "color": "purple"
     },
-    "entry": {
-        "name": "OpenInventory",
-        "icon": {
-            "name": "database",
-            "color": "purple"
-        },
+    "auth": {
+      "type": "none"
+    },
+    "requests": [
+      {
+        "name": "Filter Item",
+        "url": " http://{{HOSTNAME}}:{{PORT}}/filteritem",
+        "method": "POST",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
         "auth": {
-            "type": "none"
+          "type": "inherited"
         },
-        "requests": [
-            {
-                "name": "Filter Item",
-                "url": " http://{{HOSTNAME}}:{{PORT}}/filteritem",
-                "method": "GET",
-                "headers": [],
-                "queryParams": [],
-                "pathParams": [],
-                "auth": {
-                    "type": "inherited"
-                },
-                "body": {
-                    "type": "text",
-                    "file": {
-                        "name": ""
-                    },
-                    "text": {
-                        "value": "{\n  \"category\": \"Gadgets\",\n  \"color\": \"Red\",\n  \"is_active\": true\n}",
-                        "format": "application/json"
-                    },
-                    "form": {
-                        "isMultipart": false,
-                        "fields": []
-                    },
-                    "graphql": {
-                        "query": "",
-                        "variables": ""
-                    }
-                }
-            },
-            {
-                "name": "Modify Item",
-                "url": "http://{{HOSTNAME}}:{{PORT}}/modifyitem?full=true",
-                "method": "PUT",
-                "headers": [],
-                "queryParams": [],
-                "pathParams": [],
-                "auth": {
-                    "type": "inherited"
-                },
-                "body": {
-                    "type": "text",
-                    "file": {
-                        "name": ""
-                    },
-                    "text": {
-                        "value": "{\n  \"filter\": {\n    \"name\": \"Widget\",\n    \"category\": \"Gadgets\"\n  },\n  \"update\": {\n    \"attributes\": {\n      \"unit_price\": 24.99,\n      \"stock_level\": 150\n    },\n    \"supplier\": {\n      \"name\": \"Acme Supplies\"\n    }\n  }\n}",
-                        "format": "application/json"
-                    },
-                    "form": {
-                        "isMultipart": false,
-                        "fields": []
-                    },
-                    "graphql": {
-                        "query": "",
-                        "variables": ""
-                    }
-                }
-            },
-            {
-                "name": "Add Item",
-                "url": " http://{{HOSTNAME}}:{{PORT}}/additem",
-                "method": "POST",
-                "headers": [],
-                "queryParams": [],
-                "pathParams": [],
-                "auth": {
-                    "type": "inherited"
-                },
-                "body": {
-                    "type": "text",
-                    "file": {
-                        "name": ""
-                    },
-                    "text": {
-                        "value": "{\n  \"attributes\": {\n    \"name\": \"Widget\",\n    \"description\": \"High-quality widget\",\n    \"color\": \"Red\",\n    \"category\": \"Gadgets\",\n    \"location\": \"A1\",\n    \"unit_price\": 19.99,\n    \"stock_level\": 100\n  },\n  \"supplier\": {\n    \"name\": \"Acme Supplies\",\n    \"supplier_type\": \"wholesale\"\n  }\n}",
-                        "format": "application/json"
-                    },
-                    "form": {
-                        "isMultipart": false,
-                        "fields": []
-                    },
-                    "graphql": {
-                        "query": "",
-                        "variables": ""
-                    }
-                }
-            },
-            {
-                "name": "Delete Item",
-                "url": "http://{{HOSTNAME}}:{{PORT}}/deleteitem?full=true",
-                "method": "DELETE",
-                "headers": [],
-                "queryParams": [],
-                "pathParams": [],
-                "auth": {
-                    "type": "inherited"
-                },
-                "body": {
-                    "type": "text",
-                    "file": {
-                        "name": ""
-                    },
-                    "text": {
-                        "value": "{\n  \"id\": 1759662052351000,\n  \"attributes\": {\n    \"name\": \"Super Widget\",\n    \"category\": \"Gadgets\"\n  }\n}",
-                        "format": "application/json"
-                    },
-                    "form": {
-                        "isMultipart": false,
-                        "fields": []
-                    },
-                    "graphql": {
-                        "query": "",
-                        "variables": ""
-                    }
-                }
-            }
-        ]
-    }
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "{}",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Modify Item",
+        "url": "http://{{HOSTNAME}}:{{PORT}}/modifyitem?full=true",
+        "method": "PUT",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "{\n  \"filter\": {\n    \"name\": \"Widget\",\n    \"category\": \"Gadgets\"\n  },\n  \"update\": {\n    \"attributes\": {\n      \"unit_price\": 24.99,\n      \"stock_level\": 150\n    },\n    \"supplier\": {\n      \"name\": \"Acme Supplies\"\n    }\n  }\n}",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Add Item",
+        "url": " http://{{HOSTNAME}}:{{PORT}}/additem",
+        "method": "POST",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "{\n  \"attributes\": {\n    \"name\": \"Widget\",\n    \"description\": \"High-quality widget\",\n    \"color\": \"Red\",\n    \"category\": \"Gadgets\",\n    \"location\": \"A1\",\n    \"unit_price\": 19.99,\n    \"stock_level\": 100\n  },\n  \"supplier\": {\n    \"name\": \"Acme Supplies\",\n    \"supplier_type\": \"wholesale\"\n  }\n}",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Delete Item",
+        "url": "http://{{HOSTNAME}}:{{PORT}}/deleteitem?full=true",
+        "method": "DELETE",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "{\n  \"id\": 1765004941077000,\n  \"attributes\": {\n    \"name\": \"Super Widget\",\n    \"category\": \"Gadgets\"\n  }\n}",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Get All Items",
+        "url": "http://{{HOSTNAME}}:{{PORT}}/getitems",
+        "method": "GET",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "text",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      }
+    ]
+  }
 }
